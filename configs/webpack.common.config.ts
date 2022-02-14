@@ -1,35 +1,35 @@
-import { Configuration } from 'webpack';
-import { resolve } from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { Configuration } from "webpack";
+import { resolve } from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export const common: Configuration = {
-  context: resolve(__dirname, '../src'),
+  context: resolve(__dirname, "../src"),
   entry: {
-    main: './index.tsx',
+    main: "./index.tsx",
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   module: {
     rules: [
       {
         test: /\.ts$|tsx$/,
         use: {
-          loader: 'ts-loader',
+          loader: "ts-loader",
           options: {
-            transpileOnly: true
-          }
+            transpileOnly: true,
+          },
         },
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: resolve(__dirname, '../static/templates/index.html'),
-      title: 'Influencer compare',
-      scriptLoading: 'defer',
-      favicon: resolve(__dirname, '../static/images/favicon.ico'),
-    })
-  ]
+      template: resolve(__dirname, "../static/templates/index.html"),
+      title: "Influencer compare",
+      scriptLoading: "defer",
+      favicon: resolve(__dirname, "../static/images/favicon.ico"),
+    }),
+  ],
 };

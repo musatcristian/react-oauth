@@ -2,22 +2,24 @@ import React, { FunctionComponent } from 'react';
 
 import { IAccountDetailsProps } from '../../types';
 
+import styles from './Details.module.css';
+
 export const AccountDetails: FunctionComponent<IAccountDetailsProps> = ({ details }) => {
   return (
-    <article>
-      <h4>Account Details</h4>
+    <article className={styles.details}>
+      <h3>Account Details</h3>
       {details && (
         <div>
-          <h5>{details.full_name}</h5>
-          <span>{details.biography}</span>
-          <span>{details.followers}</span>
-          <span>{details.last_retrieved.toLocaleTimeString()}</span>
-          <h6>Latest Post</h6>
-          <span>{details.recent_post.type}</span>
-          <span>{details.recent_post.display_url}</span>
-          <span>{details.recent_post.likes}</span>
-          <span>{details.recent_post.comments}</span>
-          <span>{details.recent_post.shortcode}</span>
+          <h4>details.full_name</h4>
+          <span className={styles.detail}>{details.biography}</span>
+          <span className={styles.detail}>{details.followers}</span>
+          <span className={styles.detail}>{details.last_retrieved.toLocaleTimeString()}</span>
+          <h5>Latest Post</h5>
+          <span className={styles.detail}>{details.recent_post.type}</span>
+          <span className={styles.detail}>{details.recent_post.display_url}</span>
+          <span className={styles.detail}>{details.recent_post.likes}</span>
+          <span className={styles.detail}>{details.recent_post.comments}</span>
+          <span className={styles.detail}>{details.recent_post.shortcode}</span>
         </div>
       )}
     </article>

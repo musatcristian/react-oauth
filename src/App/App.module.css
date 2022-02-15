@@ -1,0 +1,23 @@
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  padding: 30px;
+  min-height: calc(100vh - 120px);
+}
+
+.details {
+  flex-grow: 1;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgb(70 130 180 / 0.2);
+  margin-top: 15px;
+  padding: 5px;
+  position: relative;
+}
+
+.container {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}

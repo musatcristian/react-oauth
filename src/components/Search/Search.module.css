@@ -1,0 +1,31 @@
+.searchHeader {
+  display: flex;
+  min-width: 100%;
+}
+
+.searchHeader input {
+  height: 15px;
+  padding: 10px 5px;
+  border-radius: 5px;
+  min-width: 200px;
+  margin-bottom: 10px;
+}
+
+.searchSection {
+  flex-basis: 50%;
+}
+
+.searchSection button {
+  background-color: skyblue;
+  border: 2px solid rgb(51, 60, 65);
+  color: rgb(184, 146, 64);
+  padding: 9px 15px;
+  border-radius: 5px;
+  margin: 0 10px;
+}
+
+.searchSection button:disabled {
+  background-color: lightgray;
+  color: steelblue;
+  cursor: not-allowed;
+}

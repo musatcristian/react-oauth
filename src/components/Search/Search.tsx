@@ -3,6 +3,8 @@ import React, { ChangeEvent, FunctionComponent, useCallback, useState } from 're
 import { PLACEHOLDER_ACCOUNT, PLACEHOLDER_POST, SEARCH_HANDLE, SEARCH_LATEST, SEARCH_POST } from '../../constants';
 import { ISearchProps } from '../../types';
 
+import styles from './Search.module.css';
+
 export const Search: FunctionComponent<ISearchProps> = ({ onAccountSearch, onPostSearch }) => {
   const [searchHandle, setSearchHandle] = useState<string>('');
   const [searchShortcode, setSearchShortcode] = useState<string>('');
@@ -27,8 +29,8 @@ export const Search: FunctionComponent<ISearchProps> = ({ onAccountSearch, onPos
   };
 
   return (
-    <header>
-      <section>
+    <header className={styles.searchHeader}>
+      <section className={styles.searchSection}>
         <input
           type='text'
           name='handle'
@@ -39,11 +41,12 @@ export const Search: FunctionComponent<ISearchProps> = ({ onAccountSearch, onPos
         <button onClick={handleSearchAccount(false)} disabled={!searchHandle}>
           {SEARCH_HANDLE}
         </button>
+        <button onClick={handleSearchAccount(true)} disabled={!searchHandle}>
+          {SEARCH_LATEST}
+        </button>
       </section>
-      <button onClick={handleSearchAccount(true)} disabled={!searchHandle}>
-        {SEARCH_LATEST}
-      </button>
-      <section>
+
+      <section className={styles.searchSection}>
         <input
           type='text'
           name='shortcode'

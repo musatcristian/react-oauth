@@ -3,6 +3,9 @@ import React, { useCallback, useState } from 'react';
 import { IAccountDetails, IPostDetails } from '../types';
 import { getAccountDetails, getPostDetails } from '../utils';
 import { Search, AccountDetails, PostDetails, NotFound, Loading } from '../components';
+import { HEADING } from '../constants/common.constant';
+
+import styles from './App.module.css';
 
 export const App: React.FunctionComponent = () => {
   const [accountDetails, setAcountDetails] = useState<IAccountDetails | null>(null);
@@ -37,13 +40,13 @@ export const App: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <main>
-      <div>Newest post from your favorite influencer!</div>
+    <main className={styles.main}>
+      <h3>{HEADING}</h3>
       <Search onAccountSearch={handleAccountSearch} onPostSearch={handlePostSearch} />
-      <section>
+      <section className={styles.details}>
         {loading && <Loading />}
         {showNotFound && <NotFound />}
-        <div>
+        <div className={styles.container}>
           <AccountDetails details={accountDetails} />
           <PostDetails details={postDetails} />
         </div>

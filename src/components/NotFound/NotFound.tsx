@@ -1,6 +1,8 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import { ERROR } from '../../constants/common.constant';
+
+import styles from './NotFound.module.css';
 
 export const NotFound = () => {
-  return <div>We couldn't find the requested resource</div>;
+  return <div className={styles.notFound}>{ERROR}</div>;
 };

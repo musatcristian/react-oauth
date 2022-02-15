@@ -4,5 +4,8 @@ export const getPostDetails = async (shortcode: string) => {
       'Content-Type': 'application/json',
     },
   });
+  if (result.status === 204) {
+    throw new Error();
+  }
   return result.json();
 };

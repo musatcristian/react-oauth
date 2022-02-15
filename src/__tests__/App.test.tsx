@@ -3,23 +3,24 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { App } from '../app';
 import { getAccountDetails, getPostDetails } from '../utils';
-import { AccountDetails, PostDetails } from '../types';
+import { IAccountDetails, IPostDetails } from '../types';
 import { PLACEHOLDER_ACCOUNT, PLACEHOLDER_POST, SEARCH_HANDLE, SEARCH_POST } from '../constants';
 
-const mock_account: AccountDetails = {
+const mock_account: IAccountDetails = {
   biography: 'biography',
   last_retrieved: new Date(),
   full_name: 'Full Name',
   followers: 2,
   recent_post: {
     shortcode: 'shortcode',
-    url: 'url',
+    display_url: 'url',
     likes: 5,
     comments: 3,
+    type: 'image',
   },
 };
 
-const mock_post: PostDetails = {
+const mock_post: IPostDetails = {
   alt: 'alt definition',
   caption: 'caption',
   dimensions: {

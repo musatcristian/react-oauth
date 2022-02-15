@@ -1,22 +1,17 @@
-export interface AccountDetails {
+export interface IAccountDetails {
   biography: string;
   last_retrieved: Date;
   full_name: string;
   followers: number;
   recent_post: {
     shortcode: string;
-    url: string;
+    display_url: string;
     likes: number;
     comments: number;
+    type: 'image' | 'video' | 'carousel';
   };
 }
 
-export interface PostDetails {
-  display_url: string;
-  dimensions: {
-    height: number;
-    width: number;
-  };
-  alt: string;
-  caption: string;
+export interface IAccountDetailsProps {
+  details: IAccountDetails | null;
 }

@@ -4,5 +4,8 @@ export const getAccountDetails = async (handle: string, force = false) => {
       'Content-Type': 'application/json',
     },
   });
+  if (result.status === 204) {
+    throw new Error();
+  }
   return result.json();
 };

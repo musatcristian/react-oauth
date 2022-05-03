@@ -11,7 +11,7 @@ import { common } from './webpack.common.config';
 const prodConfig = {
   mode: 'production',
   output: {
-    path: resolve(__dirname, '../__dist__'),
+    path: resolve(__dirname, '../docs'),
     filename: '[name].[contenthash].js',
   },
   plugins: [

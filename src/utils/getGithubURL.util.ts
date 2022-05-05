@@ -6,10 +6,7 @@ export const getUserIdentity = async (client_id: string, redirect_uri: string, s
   const url = getGitHubURL(client_id, redirect_uri, scope);
   try {
     const result = await fetch(url, {
-      headers: {
-        Accept: 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
+      mode: 'no-cors',
     });
     if (result.status === 204) {
       throw new Error();

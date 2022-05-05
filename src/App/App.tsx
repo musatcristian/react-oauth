@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
+import { Routes, Route, useParams } from "react-router-dom";
 
 import { IAccountDetails, IPostDetails } from '../types';
 import { getAccountDetails, getGitHubURL, getPostDetails } from '../utils';
-import { Search, AccountDetails, PostDetails, NotFound, Loading, Login } from '../components';
+import { Search, AccountDetails, PostDetails, NotFound, Loading, Login, Modal } from '../components';
 import { HEADING } from '../constants/common.constant';
 
 import styles from './App.module.css';
@@ -13,44 +14,17 @@ export const App: React.FunctionComponent = () => {
   const [postDetails, setPostDetails] = useState<IPostDetails | null>(null);
   const [showNotFound, setShowNotFound] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [credentials, setCredentials] = useState<any>();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  // const handleAccountSearch = useCallback(async (handle: string, force: boolean) => {
-  //   setShowNotFound(false);
-  //   setLoading(true);
-  //   try {
-  //     const details = await getAccountDetails(handle, force);
-  //     setAcountDetails(details);
-  //   } catch (_error) {
-  //     setShowNotFound(true);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, []);
-
-  // const handlePostSearch = useCallback(async (shortcode: string) => {
-  //   setShowNotFound(false);
-  //   setLoading(true);
-  //   try {
-  //     const post = await getPostDetails(shortcode);
-  //     setPostDetails(post);
-  //   } catch (error) {
-  //     setShowNotFound(true);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }, []);
-
-  // const handleLogin = async () => {
-  //   await getUserIdentity('f03c9797f905bc9dc15f', 'http://localhost:4001/github ', 'user:email');
-  // };
-
-  const gitURL = getGitHubURL('f03c9797f905bc9dc15f', 'http://localhost:4001/auth/github ', 'user:email');
+  
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:4001/login', {
-        credentials: 'include',
-      });
+      const res = await fetch('http://localhost:4001/login');
+      const authorizeUrl = await res.text();
+      console.info(authorizeUrl);
+      window.open(authorizeUrl, '_self');
     } catch (error) {
       console.warn('resource not found');
     }
@@ -67,13 +41,32 @@ export const App: React.FunctionComponent = () => {
     }
   };
 
+  const setCookie = async () => {
+    try {
+      const githubResponse = await handleLogin();
+      console.info(githubResponse);
+      await fetch('http://localhost:4001/login/cookie', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      console.info('cookies are set');
+      setCredentials(true);
+      setShowModal(false);
+    } catch (error) {
+      console.warn('cookies not set because :', error as Error);
+    }
+  }
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  }
+
   return (
     <main className={styles.main}>
       <h3>{HEADING}</h3>
       {/* <Search onAccountSearch={handleAccountSearch} onPostSearch={handlePostSearch} /> */}
       {/* <a href={gitURL}>LOGIN with Github</a> */}
-      <Login onLogin={handleLogin} label='Login with Github' />
-      <Login onLogin={sendCookie} label='Send Cookie' />
+      {!credentials && <Login onLogin={handleShowModal} label='Login' />}
       <section className={styles.details}>
         {loading && <Loading />}
         {showNotFound && <NotFound />}
@@ -82,6 +75,9 @@ export const App: React.FunctionComponent = () => {
           <PostDetails details={postDetails} />
         </div>
       </section>
+      {showModal && <Modal>
+        <Login onLogin={handleLogin} label='Login with Github' />
+      </Modal>}
     </main>
   );
 };

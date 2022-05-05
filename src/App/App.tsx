@@ -30,17 +30,6 @@ export const App: React.FunctionComponent = () => {
     }
   };
 
-  const sendCookie = async () => {
-    try {
-      const response = await fetch('http://localhost:4001/login/cookie', {
-        method: 'POST',
-        credentials: 'include',
-      });
-    } catch (error) {
-      console.warn('resource not found');
-    }
-  };
-
   const setCookie = async () => {
     try {
       const githubResponse = await handleLogin();

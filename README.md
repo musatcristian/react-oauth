@@ -1,4 +1,4 @@
-## Influencer Compare Client App
+## Github OAuth front-end
 
 ##### The app uses _typescript_ for development, _webpack_ for bundling and _react_ for UI
 

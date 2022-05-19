@@ -7,7 +7,9 @@
     "dev": "webpack serve --config ./configs/webpack.dev.config.ts --open",
     "build": "webpack --config ./configs/webpack.prod.config.ts",
     "lint": "eslint --fix 'src/**/*.{ts,tsx}' ",
-    "test": "jest --config ./configs/jest.config.ts"
+    "test": "jest --config ./configs/jest.config.ts",
+    "test::update": "jest --config ./configs/jest.config.ts --updateSnapshot",
+    "test::watch": "jest --config ./configs/jest.config.ts --watch"
   },
   "keywords": [
     "react",
@@ -38,6 +40,7 @@
     "eslint-plugin-react-hooks": "*",
     "html-webpack-plugin": "*",
     "jest": "*",
+    "jest-environment-jsdom": "*",
     "mini-css-extract-plugin": "*",
     "prettier": "*",
     "style-loader": "*",
@@ -53,7 +56,7 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "*"
   },
   "private": "true"
 }

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> App snapshot 1`] = `
+<body>
+  <div>
+    <main>
+      <button>
+        Login
+      </button>
+      <section>
+        <div>
+          <article>
+            <h3>
+              Account Details
+            </h3>
+          </article>
+          <article>
+            <h3>
+              Post Details
+            </h3>
+          </article>
+          <button>
+            show user
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+`;
+
+exports[`<App /> renders App component 1`] = `
+<body>
+  <div>
+    <main>
+      <button>
+        Login
+      </button>
+      <section>
+        <div>
+          <article>
+            <h3>
+              Account Details
+            </h3>
+          </article>
+          <article>
+            <h3>
+              Post Details
+            </h3>
+          </article>
+          <button>
+            show user
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+`;

@@ -6,14 +6,17 @@ const config: Config.InitialOptions = {
   collectCoverageFrom: ['<rootDir>/src/*'],
   coverageDirectory: '<rootDir>/__coverage__',
   displayName: 'Influencer Compare',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'css'],
   prettierPath: '<rootDir>/node_modules/prettier',
   rootDir: '../',
-  roots: ['<rootDir>/src/__tests__'],
+  roots: ['<rootDir>/src/__tests__', '<rootDir>/src/__mocks__'],
   testRegex: '^.*test\\.(ts|tsx)$',
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
+  moduleNameMapper: {
+    '^.+\\.(css|scss)$': '<rootDir>/src/__mocks__/styleMocks.ts',
   },
   verbose: true,
 };

@@ -4,24 +4,18 @@ import { IAccountDetailsProps } from '../../types';
 
 import styles from './Details.module.css';
 
-export const AccountDetails: FunctionComponent<IAccountDetailsProps> = ({ details }) => {
+export const AccountDetails: FunctionComponent<IAccountDetailsProps> = ({
+  details: { bio, avatar_url, followers },
+}) => {
   return (
     <article className={styles.details}>
       <h3>Account Details</h3>
-      {details && (
-        <div>
-          <h4>details.full_name</h4>
-          <span className={styles.detail}>{details.biography}</span>
-          <span className={styles.detail}>{details.followers}</span>
-          <span className={styles.detail}>{details.last_retrieved.toLocaleTimeString()}</span>
-          <h5>Latest Post</h5>
-          <span className={styles.detail}>{details.recent_post.type}</span>
-          <span className={styles.detail}>{details.recent_post.display_url}</span>
-          <span className={styles.detail}>{details.recent_post.likes}</span>
-          <span className={styles.detail}>{details.recent_post.comments}</span>
-          <span className={styles.detail}>{details.recent_post.shortcode}</span>
-        </div>
-      )}
+      <div className={styles.details}>
+        <h4>Details </h4>
+        {bio && <span className={styles.detail}>{bio}</span>}
+        {followers !== undefined && <span className={styles.detail}>You have {followers} followers!</span>}
+        {avatar_url && <img src={avatar_url} height='200px' width='200px' />}
+      </div>
     </article>
   );
 };

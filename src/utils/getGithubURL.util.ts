@@ -13,6 +13,7 @@ export const getUserIdentity = async (client_id: string, redirect_uri: string, s
     }
     return result.json();
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.info(error);
   }
 };

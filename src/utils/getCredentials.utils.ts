@@ -1,3 +1,1 @@
-export const getCredentials = async () => {
-  
-}
+export const getCredentials = async () => undefined;

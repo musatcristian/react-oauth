@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 
-import { App } from '../app';
+import { App } from '../App';
 import { getAccountDetails, getPostDetails } from '../utils';
 import { IAccountDetails, IPostDetails } from '../types';
 import { PLACEHOLDER_ACCOUNT, PLACEHOLDER_POST, SEARCH_HANDLE, SEARCH_POST } from '../constants';
@@ -60,7 +60,7 @@ describe('<App />', () => {
       fireEvent.click(button);
 
       expect(mockGetAccount).toHaveBeenCalledTimes(1);
-      expect(mockGetAccount).toHaveBeenCalledWith('handle', false);
+      expect(mockGetAccount).toHaveBeenCalledWith(/handle/i, false);
     }
   });
 
@@ -79,7 +79,12 @@ describe('<App />', () => {
       fireEvent.click(button);
 
       expect(mockGetPost).toHaveBeenCalledTimes(1);
-      expect(mockGetPost).toHaveBeenCalledWith('shortcode');
+      expect(mockGetPost).toHaveBeenCalledWith(/shortcode/i);
     }
+  });
+
+  test('App snapshot', () => {
+    const { baseElement } = render(<App />);
+    expect(baseElement).toMatchSnapshot();
   });
 });

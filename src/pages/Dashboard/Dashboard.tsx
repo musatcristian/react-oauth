@@ -1,11 +1,13 @@
 import React, { FunctionComponent, PropsWithChildren } from 'react';
 
-interface IDashboardProps {}
+interface IDashboardProps {
+  test?: string;
+}
 
-export const Dashboard: FunctionComponent<PropsWithChildren<IDashboardProps>> = ({ children }) => {
-  return <div className="outer">
-    <div className="inner">
-      Dashboard
+export const Dashboard: FunctionComponent<PropsWithChildren<IDashboardProps>> = () => {
+  return (
+    <div className='outer'>
+      <div className='inner'>Dashboard</div>
     </div>
-  </div>
+  );
 };

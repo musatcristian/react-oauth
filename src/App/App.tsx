@@ -1,72 +1,68 @@
-import React, { useCallback, useState } from 'react';
-import { Routes, Route, useParams } from "react-router-dom";
+import React, { useState } from 'react';
+// import { Routes, Route, useParams } from 'react-router-dom';
 
-import { IAccountDetails, IPostDetails } from '../types';
-import { getAccountDetails, getGitHubURL, getPostDetails } from '../utils';
-import { Search, AccountDetails, PostDetails, NotFound, Loading, Login, Modal } from '../components';
+import { GithubUser } from '../types';
+import { AccountDetails, Loading, Login, Modal } from '../components';
 import { HEADING } from '../constants/common.constant';
 
 import styles from './App.module.css';
-import { getUserIdentity } from '../utils';
 
 export const App: React.FunctionComponent = () => {
-  const [accountDetails, setAcountDetails] = useState<IAccountDetails | null>(null);
-  const [postDetails, setPostDetails] = useState<IPostDetails | null>(null);
-  const [showNotFound, setShowNotFound] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [credentials, setCredentials] = useState<any>();
   const [showModal, setShowModal] = useState<boolean>(false);
-
-  
+  const [user, setUser] = useState<GithubUser | null>(null);
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('http://localhost:4001/login');
+      const res = await fetch('http://localhost:4001/login', {
+        method: 'GET',
+        mode: 'cors',
+        redirect: 'follow',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
       const authorizeUrl = await res.text();
-      console.info(authorizeUrl);
-      window.open(authorizeUrl, '_self');
+      window.open(authorizeUrl, '_blank');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn('resource not found');
     }
   };
 
-  const setCookie = async () => {
-    try {
-      const githubResponse = await handleLogin();
-      console.info(githubResponse);
-      await fetch('http://localhost:4001/login/cookie', {
-        method: 'GET',
-        credentials: 'include',
-      });
-      console.info('cookies are set');
-      setCredentials(true);
-      setShowModal(false);
-    } catch (error) {
-      console.warn('cookies not set because :', error as Error);
-    }
-  }
-
   const handleShowModal = () => {
     setShowModal(true);
-  }
+  };
+
+  const handleShowUser = async () => {
+    setLoading(true);
+    const res = await fetch('http://localhost:4001/user/');
+    const user = await res.json();
+
+    setUser(user);
+    setLoading(false);
+  };
 
   return (
     <main className={styles.main}>
       <h3>{HEADING}</h3>
-      {/* <Search onAccountSearch={handleAccountSearch} onPostSearch={handlePostSearch} /> */}
-      {/* <a href={gitURL}>LOGIN with Github</a> */}
-      {!credentials && <Login onLogin={handleShowModal} label='Login' />}
+      {user === null ? <Login onLogin={handleShowModal} label='Login' /> : <div>Hi {user.name}</div>}
       <section className={styles.details}>
         {loading && <Loading />}
-        {showNotFound && <NotFound />}
-        <div className={styles.container}>
-          <AccountDetails details={accountDetails} />
-          <PostDetails details={postDetails} />
-        </div>
+        {!user && <Login label='Show User' onLogin={handleShowUser} />}
+        {user && (
+          <div className={styles.container}>
+            <AccountDetails details={user} />
+          </div>
+        )}
       </section>
-      {showModal && <Modal>
-        <Login onLogin={handleLogin} label='Login with Github' />
-      </Modal>}
+      {showModal && (
+        <Modal>
+          <Login onLogin={handleLogin} label='Login with Github' />
+        </Modal>
+      )}
     </main>
   );
 };

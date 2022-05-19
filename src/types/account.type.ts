@@ -1,3 +1,5 @@
+import { GithubUser } from './user.type';
+
 export interface IAccountDetails {
   biography: string;
   last_retrieved: Date;
@@ -13,5 +15,5 @@ export interface IAccountDetails {
 }
 
 export interface IAccountDetailsProps {
-  details: IAccountDetails | null;
+  details: GithubUser;
 }

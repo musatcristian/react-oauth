@@ -1,6 +1,7 @@
 node_modules
 __dist__
 __coverage__
+docs
 
 // mac
 .DS_Store

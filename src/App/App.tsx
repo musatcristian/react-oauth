@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 // import { Routes, Route, useParams } from 'react-router-dom';
 
 import { GithubUser } from '../types';
+import { getGithubUrl } from '../utils';
 import { AccountDetails, Loading, Login, Modal } from '../components';
-import { HEADING } from '../constants/common.constant';
+import { HEADING } from '../constants';
 
 import styles from './App.module.css';
 
@@ -14,18 +15,9 @@ export const App: React.FunctionComponent = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch('http://localhost:4001/login', {
-        method: 'GET',
-        mode: 'cors',
-        redirect: 'follow',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
+      const res = await getGithubUrl();
       const authorizeUrl = await res.text();
-      window.open(authorizeUrl, '_blank');
+      window.open(authorizeUrl, '_self');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.warn('resource not found');
@@ -38,9 +30,19 @@ export const App: React.FunctionComponent = () => {
 
   const handleShowUser = async () => {
     setLoading(true);
-    const res = await fetch('http://localhost:4001/user/');
-    const user = await res.json();
-
+    const res = await fetch('http://localhost:4001/user', {
+      method: 'GET',
+      mode: 'cors',
+      redirect: 'follow',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },      
+    });
+    const user = await res.json().catch(err => console.warn(err)
+    );
+    
     setUser(user);
     setLoading(false);
   };

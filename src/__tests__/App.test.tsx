@@ -68,7 +68,7 @@ describe('<App />', () => {
     mockGetPost.mockResolvedValueOnce(mock_post);
     const { queryByText, queryByPlaceholderText } = render(<App />);
 
-    const input = queryByPlaceholderText(PLACEHOLDER_POST);
+    const input = queryByPlaceholderText('hdhshjdjsdghjf');
     const button = queryByText(SEARCH_POST);
 
     expect(button).toBeDefined();

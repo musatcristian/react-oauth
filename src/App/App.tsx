@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 // import { Routes, Route, useParams } from 'react-router-dom';
 
 import { GithubUser } from '../types';
-import { getGithubUrl } from '../utils';
+import { getGithubUrl, showGithubUser } from '../utils';
 import { AccountDetails, Loading, Login, Modal } from '../components';
-import { HEADING } from '../constants';
+import { HEADING, LOGIN, LOGIN_GITHUB } from '../constants';
 
 import styles from './App.module.css';
 
@@ -30,18 +30,8 @@ export const App: React.FunctionComponent = () => {
 
   const handleShowUser = async () => {
     setLoading(true);
-    const res = await fetch('http://localhost:4001/user', {
-      method: 'GET',
-      mode: 'cors',
-      redirect: 'follow',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },      
-    });
-    const user = await res.json().catch(err => console.warn(err)
-    );
+
+    const user = await showGithubUser();
     
     setUser(user);
     setLoading(false);
@@ -50,7 +40,7 @@ export const App: React.FunctionComponent = () => {
   return (
     <main className={styles.main}>
       <h3>{HEADING}</h3>
-      {user === null ? <Login onLogin={handleShowModal} label='Login' /> : <div>Hi {user.name}</div>}
+      {user === null ? <Login onLogin={handleShowModal} label={LOGIN} /> : <div>Hi {user.name}</div>}
       <section className={styles.details}>
         {loading && <Loading />}
         {!user && <Login label='Show User' onLogin={handleShowUser} />}
@@ -62,7 +52,7 @@ export const App: React.FunctionComponent = () => {
       </section>
       {showModal && (
         <Modal>
-          <Login onLogin={handleLogin} label='Login with Github' />
+          <Login onLogin={handleLogin} label={LOGIN_GITHUB} />
         </Modal>
       )}
     </main>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { Routes, Route, useParams } from 'react-router-dom';
 
 import { GithubUser } from '../types';
-import { getGithubUrl, showGithubUser } from '../utils';
+import { getCredentials, getGithubUrl, showGithubUser } from '../utils';
 import { AccountDetails, Loading, Login, Modal } from '../components';
 import { HEADING, LOGIN, LOGIN_GITHUB } from '../constants';
 
@@ -12,6 +12,15 @@ export const App: React.FunctionComponent = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [user, setUser] = useState<GithubUser | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    getCredentials()
+      .then(setUser)
+      .catch(setError)
+      .finally(() => setLoading(false))
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -40,7 +49,7 @@ export const App: React.FunctionComponent = () => {
   return (
     <main className={styles.main}>
       <h3>{HEADING}</h3>
-      {user === null ? <Login onLogin={handleShowModal} label={LOGIN} /> : <div>Hi {user.name}</div>}
+      {user === null || !!error ? <Login onLogin={handleShowModal} label={LOGIN} /> : <div>Hi {user.name}</div>}
       <section className={styles.details}>
         {loading && <Loading />}
         {!user && <Login label='Show User' onLogin={handleShowUser} />}

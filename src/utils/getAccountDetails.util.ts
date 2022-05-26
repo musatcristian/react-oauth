@@ -9,3 +9,19 @@ export const getAccountDetails = async (handle: string, force = false) => {
   }
   return result.json();
 };
+
+export const getCredentials = async () => {
+  const res = await fetch('http://localhost:4001/login/cookie', {
+    headers: {
+      // "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    method: 'POST',
+    mode: 'cors',
+    redirect: 'follow',
+    credentials: 'include',
+  });
+
+  return await res.json();
+}

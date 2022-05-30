@@ -17,7 +17,11 @@ export const App: React.FunctionComponent = () => {
   useEffect(() => {
     setLoading(true);
     getCredentials()
-      .then(setUser)
+      .then((serverMessage) => {
+        if (!serverMessage.errorMessage) {
+          setUser(serverMessage);
+        }
+      })
       .catch(setError)
       .finally(() => setLoading(false));
   }, []);

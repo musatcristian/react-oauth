@@ -1,5 +1,7 @@
+import { API_URL } from '../constants';
+
 export const getPostDetails = async (shortcode: string) => {
-  const result = await fetch(`http://localhost:4001/posts/${shortcode}`, {
+  const result = await fetch(`${API_URL}/posts/${shortcode}`, {
     headers: {
       'Content-Type': 'application/json',
     },

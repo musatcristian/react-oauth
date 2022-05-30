@@ -1,13 +1,16 @@
-export const getGithubUrl = () => fetch('http://localhost:4001/login', {
-  method: 'GET',
-  mode: 'cors',
-  redirect: 'follow',
-  credentials: 'include',
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-});
+import { API_URL } from '../constants';
+
+export const getGithubUrl = () =>
+  fetch(`${API_URL}/login`, {
+    method: 'GET',
+    mode: 'cors',
+    redirect: 'follow',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  });
 
 export const handleGithubLogin = async () => {
   try {
@@ -22,7 +25,7 @@ export const handleGithubLogin = async () => {
 
 export const showGithubUser = async () => {
   try {
-    const res = await fetch('http://localhost:4001/user', {
+    const res = await fetch(`${API_URL}/user`, {
       method: 'GET',
       mode: 'cors',
       redirect: 'follow',
@@ -36,4 +39,4 @@ export const showGithubUser = async () => {
   } catch (error) {
     throw (error as Error).message;
   }
-}
+};

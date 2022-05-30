@@ -5,7 +5,15 @@ import '@testing-library/jest-dom';
 import { App } from '../App';
 import { getAccountDetails, getPostDetails, showGithubUser } from '../utils';
 import { GithubUser, IAccountDetails, IPostDetails } from '../types';
-import { HEADING, LOGIN, LOGIN_GITHUB, PLACEHOLDER_ACCOUNT, PLACEHOLDER_POST, SEARCH_HANDLE, SEARCH_POST } from '../constants';
+import {
+  HEADING,
+  LOGIN,
+  LOGIN_GITHUB,
+  PLACEHOLDER_ACCOUNT,
+  PLACEHOLDER_POST,
+  SEARCH_HANDLE,
+  SEARCH_POST,
+} from '../constants';
 
 const mock_account: IAccountDetails = {
   biography: 'biography',
@@ -64,7 +72,7 @@ const mock_user: GithubUser = {
   type: 'user',
   updated_at: 'today',
   url: 'jajjasjajs',
-}
+};
 
 jest.mock('../utils/getAccountDetails.util.ts');
 jest.mock('../utils/getPostDetails.util.ts');
@@ -76,7 +84,7 @@ const mockGithubUser = showGithubUser as jest.MockedFunction<typeof showGithubUs
 
 describe('<App />', () => {
   it('renders App component', () => {
-    const {queryByText} = render(<App />);
+    const { queryByText } = render(<App />);
 
     const main = queryByText(HEADING);
 

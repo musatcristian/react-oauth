@@ -1,5 +1,7 @@
+import { API_URL } from '../constants';
+
 export const getAccountDetails = async (handle: string, force = false) => {
-  const result = await fetch(`http://localhost:4001/accounts/${handle}?force=${force}`, {
+  const result = await fetch(`${API_URL}/accounts/${handle}?force=${force}`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -11,9 +13,8 @@ export const getAccountDetails = async (handle: string, force = false) => {
 };
 
 export const getCredentials = async () => {
-  const res = await fetch('http://localhost:4001/login/cookie', {
+  const res = await fetch(`${API_URL}/login/cookie`, {
     headers: {
-      // "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
@@ -24,4 +25,4 @@ export const getCredentials = async () => {
   });
 
   return await res.json();
-}
+};

@@ -19,7 +19,7 @@ export const App: React.FunctionComponent = () => {
     getCredentials()
       .then(setUser)
       .catch(setError)
-      .finally(() => setLoading(false))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleLogin = async () => {
@@ -41,7 +41,7 @@ export const App: React.FunctionComponent = () => {
     setLoading(true);
 
     const user = await showGithubUser();
-    
+
     setUser(user);
     setLoading(false);
   };

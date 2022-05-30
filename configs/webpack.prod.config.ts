@@ -15,7 +15,7 @@ const prodConfig = {
     filename: '[name].[contenthash].js',
   },
   plugins: [
-    new DefinePlugin({'process.env.API_URL': JSON.stringify('https://node-github-oauth-server.herokuapp.com/')}),
+    new DefinePlugin({'process.env.API_URL': JSON.stringify('https://node-github-oauth-server.herokuapp.com')}),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),

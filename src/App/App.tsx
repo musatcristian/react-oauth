@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { Routes, Route, useParams } from 'react-router-dom';
 
 import { GithubUser } from '../types';
 import { getCredentials, getGithubUrl, showGithubUser } from '../utils';

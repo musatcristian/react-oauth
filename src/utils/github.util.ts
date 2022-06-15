@@ -1,7 +1,7 @@
 import { API_URL } from '../constants';
 
 export const getGithubUrl = () =>
-  fetch(`${API_URL}/login`, {
+  fetch(`${API_URL}/login/github`, {
     method: 'GET',
     mode: 'cors',
     redirect: 'follow',
